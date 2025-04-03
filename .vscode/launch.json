@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Cypress Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": ["cypress", "open"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
