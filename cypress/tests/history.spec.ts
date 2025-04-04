@@ -1,10 +1,7 @@
-import { de, tr } from 'date-fns/locale'
-import Transfer from '../tests/Pages/transfer.js'
 import  LoginPage  from '../tests/Pages/loginpage.js'
 import history from '../tests/Pages/historic.js'
 import user from '../../data/database.json'
 
-const transfer = new Transfer()
 const  loginPage = new LoginPage()
 const historyPage = new history()
 
@@ -15,20 +12,7 @@ describe('Exercicios Cypress', () => {
    
     loginPage.accessLoginPage()
     loginPage.loginWithUser(user.users[0].username, "s3cret")
-    transfer.newTransfer() 
     historyPage.clickHistory() 
   
   })
 })
-
-describe('Exercicios Cypress', () => {
-  
-  it('Enviar dinheiro com saldo insuficiente', () => {
-   
-    loginPage.accessLoginPage()
-    loginPage.loginWithUser(user.users[0].username, "s3cret")
-    transfer.notTransfer()
-   
-  })
-})
-

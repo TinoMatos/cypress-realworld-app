@@ -7,6 +7,7 @@ class LoginPage{
             passwordField: "[type='password']",
             loginbutton: "[tabindex='0']",
             wrongCredentialsAlert : "[role='alert']",
+            accessvalid: "[data-test='sidenav-username']",
         }
         return selectors
     }
@@ -19,14 +20,17 @@ class LoginPage{
 
     loginWithUser(username, password){
         cy.get(this.selectorsList().usernameField).type(username)
-        cy.get(this.selectorsList().passwordField).type(password)
+        cy.get(this.selectorsList().passwordField).type(password,{log:false})
         cy.get(this.selectorsList().loginbutton).click()
+        cy.get(this.selectorsList().accessvalid).should('be.visible')
     }
    
-    checkaAccessIvalid(){
+    checkaAccessInvalid(username, password){
+        cy.get(this.selectorsList().usernameField).type(username)
+        cy.get(this.selectorsList().passwordField).type(password,{log:false})
+        cy.get(this.selectorsList().loginbutton).click()
         cy.get(this.selectorsList().wrongCredentialsAlert)
     }
 }
-
 
 export default LoginPage

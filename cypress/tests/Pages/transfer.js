@@ -9,26 +9,27 @@ class Transfer {
             note: "#transaction-create-description-input", 
             buttonPay: "[data-test='transaction-create-submit-payment']", 
             saldo: "[data-test='sidenav-user-balance']" ,
-            error: ".Mui-required"
+            error: ".Mui-required",
+            personal:'.css-r6xdvf-MuiListSubheader-root',
         }
         return selectors;
     }
 
     newTransfer() {
- 
         cy.get(this.selectorsList().newTransfer).click()
-        cy.get(this.selectorsList().createTransfer).type('teste')
+        cy.get(this.selectorsList().createTransfer).type('Darrel')
         cy.get(this.selectorsList().contact).eq(1).click()
 
         cy.get(this.selectorsList().saldo).invoke('text').then((saldoText) => {
             const saldo_t = parseFloat(saldoText.replace(/[^\d.-]/g, ''))
 
-            const valor_t = 2000
+            const valor_t = 500
 
             if (valor_t <= saldo_t) {
                 cy.get(this.selectorsList().valor).type(valor_t)
                 cy.get(this.selectorsList().note).type('Saldo suficiente')
                 cy.get(this.selectorsList().buttonPay).click()
+                cy.get(this.selectorsList().personal).should('be.visible')
 
             } else {
                 cy.get(this.selectorsList().valor).type(valor_t)
@@ -38,13 +39,13 @@ class Transfer {
         })
     }
     notTransfer() {
-        
         cy.get(this.selectorsList().newTransfer).click()
         cy.get(this.selectorsList().createTransfer).type('teste')
         cy.get(this.selectorsList().contact).eq(1).click()
         cy.get(this.selectorsList().note).type('Saldo insuficiente')
         cy.get(this.selectorsList().error).should('be.visible')
         .and('contain', 'Please enter a valid amount')
+        
     }
         
 }
